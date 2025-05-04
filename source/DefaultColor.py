@@ -43,15 +43,17 @@ class DefaultColor:
         raise ValueError("Cor ausente na classe DefaultColor não pode ser atribuida")
             
     def setColor(self, color : str | tuple[int, int, int] | None = None):
-        if type(color) == str:
+        if isinstance(color, str):
             self.__name = color.upper()
             self.__tuple = self.tupleOfColor(color)
-        elif type(color) == tuple and len(color) == 3 and all(type(num) == int for num in color):
+        elif isinstance(color, tuple) and len(color) == 3 and all(type(num) == int for num in color):
             self.__tuple = color
             self.__name = self.nameOfColor(color)
-        else:
+        elif color is None:
             self.__name = "BLACK"
-            self.__tuple = (0, 0, 0)     
+            self.__tuple = (0, 0, 0)
+        else:
+            raise ValueError("Argumento invalido para setColor")   
     
     def __init__(self, color : str | tuple[int, int, int] | None = None):
         self.setColor(color)

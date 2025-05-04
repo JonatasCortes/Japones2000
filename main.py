@@ -1,5 +1,6 @@
+print("haro- wa-rudo")
 import pygame
-from source import DefaultColor
+from source import DefaultColor, DefaultText, DefaultRectArea
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -34,3 +35,4 @@ while running:
     dt = clock.tick(60) / 1000
 
 pygame.quit()
+

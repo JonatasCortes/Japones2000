@@ -1,1 +1,3 @@
-from .default_color import DefaultColor
+from .DefaultColor import DefaultColor
+from .DefaultRectArea import DefaultRectArea
+from .DefaultText import DefaultText
