@@ -31,7 +31,7 @@ class DefaultButton:
             self.__sound.play()
 
     def drawButton(self, screen : pygame.Surface):
-        pygame.draw.rect(screen, self.__default_border_color, self.__area.getRect(), self.__area.getBorder())
+        pygame.draw.rect(screen, self.__area.getColorTuple(), self.__area.getRect(), self.__area.getBorder())
         self.__text.drawText(screen)
 
     def changeColorOnHoover(self, mouse_pos : tuple[int, int], hoover_color : DefaultColor):

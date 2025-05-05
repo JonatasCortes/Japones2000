@@ -12,9 +12,9 @@ class DefaultText:
 
     def drawText(self, screen : pygame.Surface):
 
-        font = pygame.font.Font(None, self.__size)
+        font = pygame.font.SysFont("MS Gothic", self.__size)
 
-        text_surface = font.render(self.__text, True, self.__color)
+        text_surface = font.render(self.__text, True, self.__color.getTuple())
         text_rect = text_surface.get_rect(center=(self.__x_pos, self.__y_pos))
 
         screen.blit(text_surface, text_rect)
@@ -46,7 +46,7 @@ class DefaultText:
         if y_pos is None:
             self.__y_pos = 0
         elif isinstance(y_pos, int):
-            self.__x_pos = y_pos
+            self.__y_pos = y_pos
         else:
             raise ValueError("O valor da coordenada y de um DefaultText deve ser inteiro ou nulo")
 

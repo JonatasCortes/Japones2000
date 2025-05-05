@@ -1,6 +1,8 @@
-print("haro- wa-rudo")
 import pygame
-from source import DefaultColor, DefaultText, DefaultRectArea
+from source.DefaultColor import DefaultColor
+from source.DefaultText import DefaultText
+from source.DefaultRectArea import DefaultRectArea
+from source.DefaultButton import DefaultButton
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -8,11 +10,17 @@ clock = pygame.time.Clock()
 running = True
 dt = 0
 
-banana = pygame.mixer.Sound("banana")
+area = DefaultRectArea(50, 50, 190, 70, 5, "white")
+texto = DefaultText("バナナ banana", 25, color="white")
+botao = DefaultButton(area, texto)
+magenta = DefaultColor("magenta")
 
 player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
 while running:
+
+    mouse_pos = pygame.mouse.get_pos()
+    botao.changeColorOnHoover(mouse_pos, magenta)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -20,7 +28,7 @@ while running:
 
     screen.fill("black")
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
+    botao.drawButton(screen)
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
