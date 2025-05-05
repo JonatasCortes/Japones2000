@@ -1,13 +1,23 @@
 from .DefaultColor import DefaultColor
+import pygame
 
 class DefaultText:
     
-    def __init__(self, text : str, size : int, x_pos : int, y_pos : int, color : DefaultColor | str | tuple[int, int, int] | None = None):
+    def __init__(self, text : str, size : int, x_pos : int | None = None, y_pos : int | None = None, color : DefaultColor | str | tuple[int, int, int] | None = None):
         self.__text = text
         self.__size = size
-        self.__x_pos = x_pos
-        self.__y_pos = y_pos
+        self.setX(x_pos)
+        self.setY(y_pos)
         self.setColor(color)
+
+    def drawText(self, screen : pygame.Surface):
+
+        font = pygame.font.Font(None, self.__size)
+
+        text_surface = font.render(self.__text, True, self.__color)
+        text_rect = text_surface.get_rect(center=(self.__x_pos, self.__y_pos))
+
+        screen.blit(text_surface, text_rect)
 
     def setColor(self, color : DefaultColor | str | tuple[int, int, int] | None = None):
         if isinstance(color, DefaultColor):
@@ -24,6 +34,22 @@ class DefaultText:
     def getText(self) -> str:
         return self.__text
     
+    def setX(self, x_pos : int | None = None):
+        if x_pos is None:
+            self.__x_pos = 0
+        elif isinstance(x_pos, int):
+            self.__x_pos = x_pos
+        else:
+            raise ValueError("O valor da coordenada x de um DefaultText deve ser inteiro ou nulo")
+    
+    def setY(self, y_pos : int | None = None):
+        if y_pos is None:
+            self.__y_pos = 0
+        elif isinstance(y_pos, int):
+            self.__x_pos = y_pos
+        else:
+            raise ValueError("O valor da coordenada y de um DefaultText deve ser inteiro ou nulo")
+
     def getX(self) -> int:
         return self.__x_pos
     
