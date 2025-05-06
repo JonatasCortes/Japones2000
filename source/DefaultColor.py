@@ -30,6 +30,11 @@ class DefaultColor:
         "TURQUOISE": (64, 224, 208)
     }
 
+    def __init__(self, color : str | tuple[int, int, int] | None = None):
+        self.setColor(color)
+        self.__increasing = True
+        self.__current_channel = 0
+
     def tupleOfColor(self, color_name : str) -> tuple:
         for color_key in self.color_dict.keys():
             if color_name.upper() == color_key:
@@ -40,7 +45,7 @@ class DefaultColor:
         for color_key, color_value in self.color_dict.items():
             if color_tuple == color_value:
                 return color_key
-        raise ValueError("Cor ausente na classe DefaultColor não pode ser atribuida")
+        return "CUSTOM"
             
     def setColor(self, color : str | tuple[int, int, int] | None = None):
         if isinstance(color, str):
@@ -53,10 +58,34 @@ class DefaultColor:
             self.__name = "BLACK"
             self.__tuple = (0, 0, 0)
         else:
-            raise ValueError("Argumento invalido para setColor")   
-    
-    def __init__(self, color : str | tuple[int, int, int] | None = None):
-        self.setColor(color)
+            raise ValueError("Argumento invalido para setColor")
+        
+    def incrementColor(self, index_rgb : int, delta : int = 1):
+
+        color_list = list(self.__tuple)
+
+        if index_rgb in range(0, 3) and (color_list[index_rgb] + delta) in range(0, 256):
+            color_list[index_rgb] += delta
+            self.__tuple = tuple(color_list)
+            self.__name = "CUSTOM"
+
+    def rainbow(self, speed : int = 1):
+        r, g, b = self.__tuple
+
+        if r+speed < 255 and g == 0 and b == 0:
+            self.incrementColor(0, speed)  # r++
+        elif r+speed >= 255 and g+speed <= 255 and b == 0:
+            self.incrementColor(1, speed)  # g++
+        elif g+speed >= 255 and r > 0 and b == 0:
+            self.incrementColor(0, -speed) # r--
+        elif g+speed >= 255 and b+speed <= 255 and r == 0:
+            self.incrementColor(2, speed)  # b++
+        elif b+speed >= 255 and g > 0 and r == 0:
+            self.incrementColor(1, -speed) # g--
+        elif b+speed >= 255 and r+speed <= 255 and g == 0:
+            self.incrementColor(0, speed)  # r++
+        elif r+speed >= 255 and b > 0 and g == 0:
+            self.incrementColor(2, -speed) # b--
 
     def getName(self) -> str:
         return self.__name

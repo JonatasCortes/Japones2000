@@ -2,7 +2,7 @@ from .DefaultColor import DefaultColor
 
 class DefaultRectArea:
 
-    def __init__(self, x_pos : int, y_pos : int, width : int, height : int, border : int | None = None, color : DefaultColor | str | tuple[int, int, int] | None = None):
+    def __init__(self, x_pos : int, y_pos : int, width : int, height : int, border : int = 5, color : DefaultColor | str | tuple[int, int, int] | None = None):
         self.__x_pos = x_pos
         self.__y_pos = y_pos
         self.__width = width
