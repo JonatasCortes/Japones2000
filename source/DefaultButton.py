@@ -6,6 +6,9 @@ import pygame
 class DefaultButton:
     def __init__(self, area : DefaultRectArea, text : DefaultText, sound : str | None = None):
         self.__area = area
+        self.__area.setWidth(int(text.getSize()*len(text.getText())*1.2))
+        self.__area.setHeight(int(text.getSize()*1.8))
+        self.__area.setX(self.__area.getX() - self.__area.getWidth()//2)
         self.__default_border_color = self.__area.getColorTuple()
         self.__setText(text)
         self.__default_text_color = self.__text.getColorTuple()

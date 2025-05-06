@@ -8,6 +8,8 @@ from source.DefaultButton import DefaultButton
 
 screen_width = 640
 screen_height = 720
+screen_horisontal_center = screen_width//2
+screen_vertical_center = screen_height//2
 
 # endregion
 
@@ -15,7 +17,7 @@ screen_height = 720
 
 title_text = "日本の二千"
 title_size = 100
-title_x_pos = screen_width//2
+title_x_pos = screen_horisontal_center
 title_y_pos = 100
 title_color = DefaultColor((0, 0, 0))
 title_color_custom = 1
@@ -24,14 +26,18 @@ title = DefaultText(title_text, title_size, title_x_pos, title_y_pos)
 # endregion
 
 # region HIRAGANA BUTTON INFO
-hiragana_button_width = 160
-hiragana_button_height = 65
-hiragana_button_x_coord = screen_width//2 - hiragana_button_width//2
-hiragana_button_y_coord = screen_height//2
-hiragana_button_color = DefaultColor("white")
-hiragana_button_area = DefaultRectArea(hiragana_button_x_coord, hiragana_button_y_coord, hiragana_button_width, hiragana_button_height, color= hiragana_button_color)
-hiragana_button_text = DefaultText("ひらがな", 16, color= hiragana_button_color)
-hiragana_button = DefaultButton(hiragana_button_area, hiragana_button_text, hiragana_button_color)
+hiragana_button_text_size = 46
+hiragana_button_text_value = "ひらがな"
+
+hiragana_button_default_color = DefaultColor("white")
+hiragana_button_hoover_color = DefaultColor("cyan")
+
+hiragana_button_x_coord = screen_horisontal_center
+hiragana_button_y_coord = screen_vertical_center
+
+hiragana_button_area = DefaultRectArea(hiragana_button_x_coord, hiragana_button_y_coord, color= hiragana_button_default_color)
+hiragana_button_text = DefaultText(hiragana_button_text_value,hiragana_button_text_size, color= hiragana_button_default_color)
+hiragana_button = DefaultButton(hiragana_button_area, hiragana_button_text, hiragana_button_default_color)
 
 pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -53,14 +59,9 @@ def mainLoop():
             if event.type == pygame.QUIT:
                 running = False
 
-        title_color.rainbow(3)
-        title.setColor(title_color)
+        title.getColor().rainbow(3)
         title.drawText(screen)
-        '''
-        hiragana_button_color.rainbow(3)
-        hiragana_button_text.setColor(hiragana_button_color)
-        hiragana_button_area.setColor(hiragana_button_color)
-        '''
+
         hiragana_button.drawButton(screen)
         hiragana_button.changeColorOnHoover(mouse_pos, "cyan")
         

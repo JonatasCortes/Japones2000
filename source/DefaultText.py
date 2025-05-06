@@ -31,6 +31,9 @@ class DefaultText:
     def getColorTuple(self) -> tuple[int, int, int]:
         return self.__color.getTuple()
     
+    def getColor(self) -> DefaultColor:
+        return self.__color
+    
     def getText(self) -> str:
         return self.__text
     
