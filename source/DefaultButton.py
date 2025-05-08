@@ -4,15 +4,17 @@ from .DefaultText import DefaultText
 import pygame
 
 class DefaultButton:
-    def __init__(self, area : DefaultRectArea, text : DefaultText, sound : str | None = None):
+    def __init__(self, area : DefaultRectArea, text : DefaultText, sound : str | None = None, hoover_color : DefaultColor = DefaultColor("white")):
         self.__area = area
         self.__area.setWidth(int(text.getSize()*len(text.getText())*1.2))
         self.__area.setHeight(int(text.getSize()*1.8))
         self.__area.setX(self.__area.getX() - self.__area.getWidth()//2)
+        self.__area.setY(self.__area.getY() - self.__area.getHeight()//2)
         self.__default_border_color = self.__area.getColorTuple()
         self.__setText(text)
         self.__default_text_color = self.__text.getColorTuple()
         self.__setSound(sound)
+        self.__hoover_color = hoover_color
 
     def __setText(self, text : DefaultText):
         self.__text = text
@@ -33,15 +35,21 @@ class DefaultButton:
         if self.__sound is not None and self.__area.pointInArea(mouse_pos):
             self.__sound.play()
 
-    def drawButton(self, screen : pygame.Surface):
+    def drawButton(self, screen : pygame.Surface, mouse_pos : tuple[int, int]):
         pygame.draw.rect(screen, self.__area.getColorTuple(), self.__area.getRect(), self.__area.getBorder())
         self.__text.drawText(screen)
+        self.changeColorOnHoover(mouse_pos)
 
-    def changeColorOnHoover(self, mouse_pos : tuple[int, int], hoover_color : DefaultColor):
+    def changeColorOnHoover(self, mouse_pos : tuple[int, int]):
         if self.__area.pointInArea(mouse_pos):
-            self.__area.setColor(hoover_color)
-            self.__text.setColor(hoover_color)
+            self.__area.setColor(self.__hoover_color)
+            self.__text.setColor(self.__hoover_color)
         else:
             self.__area.setColor(self.__default_border_color)
             self.__text.setColor(self.__default_text_color)
+
+    def isClicked(self, mouse_pos : tuple[int, int], event : pygame.event.Event) -> DefaultRectArea:
+        if event.type == pygame.MOUSEBUTTONDOWN and self.__area.pointInArea(mouse_pos):
+            return True
+        return False
         

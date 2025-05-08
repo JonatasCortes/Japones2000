@@ -28,6 +28,9 @@ class DefaultRectArea:
         else:
             self.__color = DefaultColor(color)
     
+    def getColor(self) -> DefaultColor:
+        return self.__color
+
     def getColorName(self) -> str:
         return self.__color.getName()
 

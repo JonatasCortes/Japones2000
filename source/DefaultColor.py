@@ -16,7 +16,9 @@ class DefaultColor:
         "LIGHT_GRAY": (192, 192, 192),
         "ORANGE": (255, 165, 0),
         "PINK": (255, 192, 203),
+        "STRONG_PINK" : (255, 100, 115),
         "PURPLE": (128, 0, 128),
+        "LIGHT_PURPLE" : (128, 50, 128),
         "BROWN": (165, 42, 42),
         "GOLD": (255, 215, 0),
         "SILVER": (192, 192, 192),
@@ -27,7 +29,9 @@ class DefaultColor:
         "TEAL": (0, 128, 128),
         "INDIGO": (75, 0, 130),
         "VIOLET": (238, 130, 238),
-        "TURQUOISE": (64, 224, 208)
+        "TURQUOISE": (64, 224, 208),
+        "SKY_BLUE" : (135, 206, 235),
+        "AQUA_GREEN" : (150, 255, 200)
     }
 
     def __init__(self, color : str | tuple[int, int, int] | None = None):
