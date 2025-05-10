@@ -119,7 +119,7 @@ center_decoration_grid_area_y_pos = 3
 center_decoration_grid_color = DefaultColor("black")
 center_decoration_grid_area = DefaultRectArea(x_pos=center_decoration_grid_area_x_pos, y_pos=center_decoration_grid_area_y_pos, width= center_decoration_grid_area_width, height= center_decoration_grid_area_height, color= center_decoration_grid_color)
 
-center_decoration_grid_radius = 5
+center_decoration_grid_radius = 10
 center_decoration_grid_spacement = 3
 center_decoration_grid = DecorationGrid(center_decoration_grid_area, center_decoration_grid_radius, center_decoration_grid_spacement)
 # endregion
