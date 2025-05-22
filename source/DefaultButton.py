@@ -26,20 +26,23 @@ class DefaultButton:
         self.__text.setY(text_y)
 
     def __setSound(self, sound : str | None = None):
-        try:
+        #try:
+        if sound is not None:
             self.__sound = pygame.mixer.Sound(sound)
-        except:
-            self.__sound = None
+        #except:
+            #self.__sound = None
 
-    def playSoundOnMouseClick(self, mouse_pos : tuple[int, int]):
-        if self.__sound is not None and self.__area.pointInArea(mouse_pos):
-            self.__sound.play()
+    def playSound(self):
+        self.__sound.play()
 
     def drawButton(self, screen : pygame.Surface, mouse_pos : tuple[int, int], backgrownd_color : DefaultColor = DefaultColor("black")):
+
         pygame.draw.rect(screen, self.__area.getColorTuple(), self.__area.getRect(), self.__area.getBorder())
+
         border = self.__area.getBorder()
         button_backgrownd_rect = [self.__area.getX()+border, self.__area.getY()+border, self.__area.getWidth()-2*border, self.__area.getHeight()-2*border]
-        pygame.draw.rect(screen, backgrownd_color, button_backgrownd_rect)
+        pygame.draw.rect(screen, backgrownd_color.getTuple(), button_backgrownd_rect)
+        
         self.__text.drawText(screen)
         self.changeColorOnHoover(mouse_pos)
 

@@ -1,10 +1,13 @@
 import pygame
+pygame.init()
+pygame.mixer.init()
 from source.DefaultColor import DefaultColor
 from source.DefaultText import DefaultText
 from source.DefaultRectArea import DefaultRectArea
 from source.DefaultCircArea import DefaultCircArea
 from source.DefaultButton import DefaultButton
 from source.DecorationGrid import DecorationGrid
+import HiraganaMenu
 
 # region SCREEN INFO
 screen_width = 640
@@ -124,15 +127,12 @@ center_decoration_grid_spacement = 3
 center_decoration_grid = DecorationGrid(center_decoration_grid_area, center_decoration_grid_radius, center_decoration_grid_spacement)
 # endregion
 
-pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
-clock = pygame.time.Clock()
 
 
 def mainLoop():
 
     running = True
-    dt = 0
 
     while running:
 
@@ -146,6 +146,15 @@ def mainLoop():
 
             if exit_button.isClicked(mouse_pos, event):
                 running = False
+
+            if hiragana_button.isClicked(mouse_pos, event):
+                HiraganaMenu.hiraganaScreen(screen)
+
+            if katakana_button.isClicked(mouse_pos, event):
+                pass
+
+            if kanji_button.isClicked(mouse_pos, event):
+                pass
 
         left_decoration_grid.getColor().rainbow(3)
         left_decoration_grid.drawGrid(screen, dynamic=True)
@@ -165,7 +174,6 @@ def mainLoop():
         exit_button.drawButton(screen, mouse_pos)
         
         pygame.display.flip()
-        dt = clock.tick(60) / 1000
 
     pygame.quit()
 
