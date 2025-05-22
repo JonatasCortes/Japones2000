@@ -7,7 +7,7 @@ from source.DefaultRectArea import DefaultRectArea
 from source.DefaultCircArea import DefaultCircArea
 from source.DefaultButton import DefaultButton
 from source.DecorationGrid import DecorationGrid
-import HiraganaMenu
+from HiraganaMenu import hiraganaScreen
 
 # region SCREEN INFO
 screen_width = 640
@@ -148,7 +148,7 @@ def mainLoop():
                 running = False
 
             if hiragana_button.isClicked(mouse_pos, event):
-                HiraganaMenu.hiraganaScreen(screen)
+                hiraganaScreen(screen)
 
             if katakana_button.isClicked(mouse_pos, event):
                 pass

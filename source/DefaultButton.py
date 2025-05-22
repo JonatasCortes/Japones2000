@@ -7,13 +7,13 @@ class DefaultButton:
     def __init__(self, area : DefaultRectArea, text : DefaultText, sound : str | None = None, hoover_color : DefaultColor = DefaultColor("white")):
         self.__area = area
         self.__area.setWidth(int(text.getSize()*len(text.getText())*1.2))
-        self.__area.setHeight(int(text.getSize()*1.8))
+        self.__area.setHeight(int(text.getSize()*(1.8 - text.getSize()*0.003)))
         self.__area.setX(self.__area.getX() - self.__area.getWidth()//2)
         self.__area.setY(self.__area.getY() - self.__area.getHeight()//2)
         self.__default_border_color = self.__area.getColorTuple()
         self.__setText(text)
         self.__default_text_color = self.__text.getColorTuple()
-        self.__setSound(sound)
+        self.setSound(sound)
         self.__hoover_color = hoover_color
 
     def __setText(self, text : DefaultText):
@@ -25,12 +25,11 @@ class DefaultButton:
         self.__text.setX(text_x)
         self.__text.setY(text_y)
 
-    def __setSound(self, sound : str | None = None):
-        #try:
-        if sound is not None:
+    def setSound(self, sound : str | None = None):
+        try:
             self.__sound = pygame.mixer.Sound(sound)
-        #except:
-            #self.__sound = None
+        except:
+            self.__sound = None
 
     def playSound(self):
         self.__sound.play()

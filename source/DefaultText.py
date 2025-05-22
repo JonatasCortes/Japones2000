@@ -61,3 +61,9 @@ class DefaultText:
     
     def getSize(self) -> int:
         return self.__size
+    
+    def setText(self, text : str):
+        self.__text = text
+
+    def setSize(self, size : int):
+        self.__size = size
