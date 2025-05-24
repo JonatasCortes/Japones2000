@@ -34,7 +34,7 @@ class DefaultButton:
     def playSound(self):
         self.__sound.play()
 
-    def drawButton(self, screen : pygame.Surface, mouse_pos : tuple[int, int], backgrownd_color : DefaultColor = DefaultColor("black")):
+    def drawButton(self, screen : pygame.Surface, backgrownd_color : DefaultColor = DefaultColor("black")):
 
         pygame.draw.rect(screen, self.__area.getColorTuple(), self.__area.getRect(), self.__area.getBorder())
 
@@ -43,7 +43,6 @@ class DefaultButton:
         pygame.draw.rect(screen, backgrownd_color.getTuple(), button_backgrownd_rect)
         
         self.__text.drawText(screen)
-        self.changeColorOnHoover(mouse_pos)
 
     def changeColorOnHoover(self, mouse_pos : tuple[int, int]):
         if self.__area.pointInArea(mouse_pos):
@@ -57,4 +56,7 @@ class DefaultButton:
         if event.type == pygame.MOUSEBUTTONDOWN and self.__area.pointInArea(mouse_pos):
             return True
         return False
+    
+    def getArea(self) -> DefaultRectArea:
+        return self.__area
         

@@ -140,6 +140,8 @@ def mainLoop():
 
         mouse_pos = pygame.mouse.get_pos()
 
+        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -168,10 +170,17 @@ def mainLoop():
         title.getColor().rainbow(3)
         title.drawText(screen)
 
-        hiragana_button.drawButton(screen, mouse_pos)
-        katakana_button.drawButton(screen, mouse_pos)
-        kanji_button.drawButton(screen, mouse_pos)
-        exit_button.drawButton(screen, mouse_pos)
+        hiragana_button.drawButton(screen)
+        hiragana_button.changeColorOnHoover(mouse_pos)
+
+        katakana_button.drawButton(screen)
+        katakana_button.changeColorOnHoover(mouse_pos)
+
+        kanji_button.drawButton(screen)
+        kanji_button.changeColorOnHoover(mouse_pos)
+
+        exit_button.drawButton(screen)
+        exit_button.changeColorOnHoover(mouse_pos)
         
         pygame.display.flip()
 
